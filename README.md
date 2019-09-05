@@ -3,7 +3,7 @@
 ## Kuvaus
 
 Whosampledthis on palvelu johon käyttäjät voivat syöttää kappaleita, tietoja
-niiden käyttämistä [sampleista](https://en.wikipedia.org/wiki/Sampling_(music) ja
+niiden käyttämistä [sampleista](https://en.wikipedia.org/wiki/Sampling_(music)) ja
 tietoja siitä missä kyseisestä kappaleesta tehtyjä sampleja on käytetty.
 
 Kuka tahansa voi tutkia tietoja kappaleista, sampleista sekä kappaleiden ja
