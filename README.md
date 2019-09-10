@@ -1,4 +1,6 @@
-# Whosampledthis -tietokantasovellus
+# Whosampledthis
+
+[App on heroku](https://thawing-coast-05641.herokuapp.com/)
 
 ## Kuvaus
 
@@ -28,9 +30,9 @@ Toimintoja:
 - Admin käyttäjät voivat hallinnoida kirjautuneita käyttäjiä sekä lisätä, muokata
 ja poistaa kappaleita.
 
-## Lisää tietoa
+## More information
 
-[Dokumentaatio](dokumentaatio/)
+[Documentation](documentation/)
 
 ## TODO
 - Change README to English
