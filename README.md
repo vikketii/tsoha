@@ -1,10 +1,19 @@
 # Whosampledthis
 
+For database application course in 2019.
+
+Whosampledthis is an application for finding information about [audio samples](https://en.wikipedia.org/wiki/Sampling_(music)) used in songs.
+
 [App on heroku](https://thawing-coast-05641.herokuapp.com/)
+
+## Documentation
+
+[Database diagram](documentation/database_diagram.png)
+[User stories](documentation/user_stories.md)
 
 ## Kuvaus
 
-Whosampledthis on palvelu johon käyttäjät voivat syöttää kappaleita, tietoja niiden käyttämistä [sampleista](https://en.wikipedia.org/wiki/Sampling_(music)) ja tietoja siitä missä kyseisestä kappaleesta tehtyjä sampleja on käytetty.
+Whosampledthis on palvelu johon käyttäjät voivat syöttää kappaleita, tietoja niiden käyttämistä sampleista ja tietoja siitä missä kyseisestä kappaleesta tehtyjä sampleja on käytetty.
 
 Kuka tahansa voi tutkia tietoja kappaleista, sampleista sekä kappaleiden ja samplejen relaatioista. Kirjautuneet käyttäjät voivat lisätä kappaleita palveluun ja merkitä, jos kappale on käyttänyt sampleja jostain jo palvelussa olevasta kappaleesta tai vielä palvelussa olemattomasta kappaleesta. Jälkimmäisessä tapauksessa käyttäjältä kysytään myös toisen kappaleen tietoja. Kirjautuneet käyttäjät voivat myös muokata jo olemassa olevien kappaleiden tietoja.
 
@@ -18,10 +27,3 @@ Toimintoja:
 - Suosituimpien samplejen listaus (katseluiden perusteella)
 - Viimeisimmät lisäykset
 - Admin käyttäjät voivat hallinnoida kirjautuneita käyttäjiä sekä lisätä, muokata ja poistaa kappaleita.
-
-## More information
-
-[Documentation](documentation/)
-
-## TODO
-- Change README to English
