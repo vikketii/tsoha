@@ -7,6 +7,11 @@
 </head>
 
 <body>
+    <ul>
+        <li><a href='{{ url_for("songs_index") }}'>List songs</a></li>
+        <li><a href='{{ url_for("songs_form") }}'>Add a song</a></li>
+    </ul>
+
     {% block body %}
     <p>
         Content.

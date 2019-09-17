@@ -3,9 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-venv/
-.vscode
-
 # Flask stuff:
 instance/
 .webassets-cache
@@ -21,4 +18,9 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
-.pytest_cache/
+.pytest_cache/songs.db
+
+#
+venv/
+.vscode
+songs.db
