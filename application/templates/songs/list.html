@@ -11,8 +11,8 @@
       <td>{{ song.name }}</td>
       <td>{{ song.views }}</td>
       <td>
-          <form method='POST' action='{{ url_for("songs_add_view", song_id=song.id) }}'>
-              <input type='submit' value='Add view!'>
+          <form method="POST" action="{{ url_for('songs_add_view', song_id=song.id) }}">
+              <input type="submit" value="Add view!">
           </form>
       </td>
     </tr>
