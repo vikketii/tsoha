@@ -6,6 +6,11 @@ Whosampledthis is an application for finding information about [audio samples](h
 
 [App on heroku](https://thawing-coast-05641.herokuapp.com/)
 
+Test credentials:
+
+username: tes
+password: ti
+
 ## Documentation
 
 [Database diagram](documentation/database_diagram.png)
