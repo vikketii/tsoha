@@ -4,11 +4,10 @@ For database application course in 2019.
 
 Whosampledthis is an application for finding information about [audio samples](https://en.wikipedia.org/wiki/Sampling_(music)) used in songs.
 
-[App on heroku](https://thawing-coast-05641.herokuapp.com/)
-
-Test credentials:
+[App on heroku](https://thawing-coast-05641.herokuapp.com/) and test credentials:
 
 username: tes
+
 password: ti
 
 ## Documentation
