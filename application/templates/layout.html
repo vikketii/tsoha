@@ -7,6 +7,14 @@
 </head>
 
 <body>
+    {% if current_user.is_authenticated %}
+    <p>
+        Logged in as {{ current_user.username }}. <a href="{{ url_for('auth_logout') }}">Log Out</a>
+    </p>
+    {% else %}
+    <a href="{{ url_for('auth_login') }}">Log In</a>
+    {% endif %}
+
     <ul>
         <li><a href="{{ url_for('songs_index') }}">List songs</a></li>
         <li><a href="{{ url_for('songs_form') }}">Add a song</a></li>
