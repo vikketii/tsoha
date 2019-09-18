@@ -2,7 +2,7 @@
 
 {% block body %}
 {{ error }}
-<form method="POST" action="{{ url_for('auth_login') }}">
+<form method="POST" action="{{ url_for('auth_signup') }}">
   <table>
     <tr>
       <td>
@@ -22,7 +22,7 @@
     </tr>
     <tr>
       <td colspan="2">
-      <input type="submit" value="Login"/>
+      <input type="submit" value="Signup"/>
       </td>
     </tr>
 </form>
