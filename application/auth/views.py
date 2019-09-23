@@ -12,6 +12,9 @@ def auth_signup():
 
     form = SignupForm(request.form)
 
+    if not form.validate():
+        return render_template('auth/signupform.html', form=form)
+
     user = User.query.filter_by(username=form.username.data).first()
     if user:
         return render_template('auth/signupform.html', form=form, error='Username already taken')

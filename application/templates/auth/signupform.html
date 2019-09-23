@@ -6,23 +6,37 @@
   <table>
     <tr>
       <td>
-	{{ form.username.label }}
+        {{ form.username.label }}
       </td>
       <td>
-	{{ form.username }}
+        {{ form.username }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.username.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
       </td>
     </tr>
     <tr>
       <td>
-	{{ form.password.label }}
+        {{ form.password.label }}
       </td>
       <td>
-	{{ form.password }}
+        {{ form.password }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.password.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
       </td>
     </tr>
     <tr>
       <td colspan="2">
-      <input type="submit" value="Signup"/>
+        <input type="submit" value="Sign up" />
       </td>
     </tr>
 </form>
