@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from application import app, db
 from application.songs.models import Song
 from application.songs.forms import SongForm
+from application.artists.models import Artist
 
 @app.route('/songs/', methods=['GET'])
 def songs_index():
@@ -13,6 +14,14 @@ def songs_index():
 @login_required
 def songs_form():
     return render_template('songs/new.html', form=SongForm())
+
+@app.route('/songs/<song_id>/', methods=['GET'])
+def songs_view_one(song_id):
+    s = Song.query.get(song_id)
+    s.views += 1
+    db.session().commit()
+
+    return render_template('songs/one.html', song=s)
 
 @app.route('/songs/<song_id>/', methods=['POST'])
 def songs_add_view(song_id):
