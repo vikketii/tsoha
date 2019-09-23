@@ -1,10 +1,11 @@
 from application import db
+from application.models import Base
 from ..artists.models import song_artist, Artist
 
 
-class Song(db.Model):
+class Song(Base):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(144), nullable=False)
+    name = db.Column(db.String(120), nullable=False)
     views = db.Column(db.Integer, nullable=False)
 
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)

@@ -1,4 +1,5 @@
 from application import db
+from application.models import Base
 from sqlalchemy.orm import relationship, backref
 
 song_artist = db.Table('song_artist',
@@ -7,9 +8,7 @@ song_artist = db.Table('song_artist',
     db.PrimaryKeyConstraint('artist_id', 'song_id')
 )
 
-class Artist(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(144), nullable=False)
+class Artist(Base):
 
     song_artist = db.relationship('Song', secondary=song_artist, backref=db.backref('artists', lazy='dynamic'))
 
