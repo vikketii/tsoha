@@ -13,6 +13,7 @@ password: ti
 ## Documentation
 
 [Database diagram](documentation/database_diagram.png)
+
 [User stories](documentation/user_stories.md)
 
 ## Kuvaus
