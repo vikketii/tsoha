@@ -34,6 +34,6 @@ class Song(Base):
 
         res = db.engine.execute(stmt)
         for row in res:
-            response = {"name": row[0], "views":row[1], "artists":row[2]}
+            response = {"name": row[0], "views": row[1], "artists": row[2]}
 
         return response

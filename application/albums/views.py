@@ -27,7 +27,7 @@ def albums_create():
     if not form.validate():
         return render_template('albums/new.html', form = form)
 
-    a = Alpublicbum(form.name.data, form.release_year.data)
+    a = Album(form.name.data, form.release_year.data)
     db.session().add(a)
     db.session().commit()
 
