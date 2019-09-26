@@ -20,8 +20,19 @@
       </td>
     </tr>
     <tr>
+      <td>
+        {{ form.song_artist.label }}
+      </td>
+      <td>
+        {{ form.song_artist }}
+      </td>
+      <td>
+        <a href="{{ url_for('artists_form') }}">Add missing artist!</a>
+      </td>
+    </tr>
+    <tr>
       <td colspan="2">
-        <input type="submit" value="Add a new song"/>
+        <input type="submit" value="Add a new song" />
       </td>
     </tr>
   </table>
