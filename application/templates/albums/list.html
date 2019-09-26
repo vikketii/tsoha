@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Album</th>
+      <th>Release year</th>
+    </tr>
+    {% for album in albums %}
+    <tr>
+      <td><a href={{ url_for('albums_view_one', album_id=album.id ) }}>{{ album.name }}</a></td>
+      <td>{{ album.release_year }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
