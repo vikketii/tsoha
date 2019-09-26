@@ -4,10 +4,12 @@
   <table>
     <tr>
       <th>Artist</th>
+      <th>Songs in database</th>
     </tr>
     {% for artist in artists %}
     <tr>
       <td><a href={{ url_for('artists_view_one', artist_id=artist.id ) }}>{{ artist.name }}</a></td>
+      <td>{{ artist.song_count }}</td>
     </tr>
     {% endfor %}
   </table>

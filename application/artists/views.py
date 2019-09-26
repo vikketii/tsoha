@@ -7,7 +7,7 @@ from application.artists.forms import ArtistForm
 
 @app.route('/artists/', methods=['GET'])
 def artists_index():
-    return render_template('artists/list.html', artists=Artist.query.all())
+    return render_template('artists/list.html', artists=Artist.get_artists_and_song_counts())
 
 @app.route('/artists/new/')
 @login_required
@@ -16,8 +16,7 @@ def artists_form():
 
 @app.route('/artists/<artist_id>/', methods=['GET'])
 def artists_view_one(artist_id):
-    a = Artist.query.get(artist_id)
-    return render_template('artists/one.html', artist=a)
+    return render_template('artists/one.html', artist=Artist.find_artist_and_all_songs(artist_id))
 
 @app.route('/artists/', methods=['POST'])
 @login_required
