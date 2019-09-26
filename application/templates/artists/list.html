@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Artist</th>
+    </tr>
+    {% for artist in artists %}
+    <tr>
+      <td><a href={{ url_for('artists_view_one', artist_id=artist.id ) }}>{{ artist.name }}</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

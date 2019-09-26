@@ -9,7 +9,7 @@ class User(db.Model):
     username = db.Column(db.String(120), nullable=False)
     password = db.Column(db.String(120), nullable=False)
 
-    songs = db.relationship('Song', backref='account', lazy=True)
+    songs = db.relationship('Song', backref='account_songs', lazy=True)
 
     def __init__(self, username, password):
         self.username = username

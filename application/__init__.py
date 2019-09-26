@@ -24,6 +24,9 @@ from application.songs import models
 from application.songs import views
 
 from application.artists import models
+from application.artists import views
+
+from application.albums import models
 
 from application.auth import models
 from application.auth import views
