@@ -4,6 +4,7 @@ from flask_login import login_required
 from application import app, db
 from application.albums.models import Album
 from application.albums.forms import AlbumForm
+from application.artists.models import Artist
 
 @app.route('/albums/', methods=['GET'])
 def albums_index():
@@ -12,7 +13,10 @@ def albums_index():
 @app.route('/albums/new/')
 @login_required
 def albums_form():
-    return render_template('albums/new.html', form=AlbumForm())
+    form = AlbumForm()
+    form.album_artist.choices = [(a.id, a.name)
+                                for a in Artist.query.order_by('name')]
+    return render_template('albums/new.html', form=form)
 
 @app.route('/albums/<album_id>/', methods=['GET'])
 def albums_view_one(album_id):
@@ -24,11 +28,13 @@ def albums_view_one(album_id):
 def albums_create():
     form = AlbumForm(request.form)
 
-    if not form.validate():
-        return render_template('albums/new.html', form = form)
+    album = Album(form.name.data, form.release_year.data)
 
-    a = Album(form.name.data, form.release_year.data)
-    db.session().add(a)
+    artist = Artist.query.get(form.album_artist.data)
+    artist.album_artist.append(album)
+
+    db.session().add(album)
+    db.session().add(artist)
     db.session().commit()
 
     return redirect(url_for('albums_index'))

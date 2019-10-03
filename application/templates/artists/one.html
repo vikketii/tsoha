@@ -3,8 +3,21 @@
 {% block body %}
 <h1>Artist: {{artist.name}}</h1>
 
+{% if artist.albums %}
+<h2>{{ artist.albums|length }} Albums</h2>
+<table>
+    <tbody>
+        {% for album in artist.albums %}
+        <tr>
+            <td><a href="{{ url_for('albums_view_one', album_id=album.id ) }}">{{ album.name }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
 {% if artist.songs %}
-<h2>{{artist.count}} Songs</h2>
+<h2>{{ artist.songs|length }} Songs</h2>
 <table class="table">
     <tbody>
         {% for song in artist.songs %}

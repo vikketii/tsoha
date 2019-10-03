@@ -16,7 +16,7 @@ def artists_form():
 
 @app.route('/artists/<artist_id>/', methods=['GET'])
 def artists_view_one(artist_id):
-    return render_template('artists/one.html', artist=Artist.find_artist_and_all_songs(artist_id))
+    return render_template('artists/one.html', artist=Artist.find_artist_and_all_albums_and_songs(artist_id))
 
 @app.route('/artists/', methods=['POST'])
 @login_required

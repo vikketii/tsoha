@@ -1,7 +1,5 @@
 from application import db
 from application.models import Base
-# from ..artists.models import song_artist, Artist
-
 from sqlalchemy.sql import text
 
 

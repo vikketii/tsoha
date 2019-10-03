@@ -21,6 +21,17 @@
     </tr>
     <tr>
       <td>
+        {{ form.album_artist.label }}
+      </td>
+      <td>
+        {{ form.album_artist }}
+      </td>
+      <td>
+        <a href="{{ url_for('artists_form') }}">Add missing artist!</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
         {{ form.release_year.label }}
       </td>
       <td>
@@ -29,7 +40,7 @@
     </tr>
     <tr>
       <td colspan="2">
-        <input type="submit" value="Add a new album"/>
+        <input type="submit" value="Add a new album" />
       </td>
     </tr>
   </table>
