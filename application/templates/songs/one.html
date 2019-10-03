@@ -2,11 +2,19 @@
 
 {% block body %}
 <h1>Title: {{song.name}}</h1>
-<h2>Artist(s): {{song.artists}}</h2>
+<h2>Artists:
+    {% for artist in song.artists %}
+        <a href="{{ url_for('artists_view_one', artist_id=artist.id ) }}">
+                {{artist.name}}
+        </a>
+    {% endfor %}
+</h2>
 <p>Views: {{song.views}}</p>
 
+{% if current_user.is_authenticated %}
 <form method="POST" action="{{ url_for('songs_delete_one', song_id=song.id) }}">
     <input type="submit" value="Delete song">
 </form>
+{% endif %}
 
 {% endblock %}

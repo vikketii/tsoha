@@ -7,16 +7,14 @@ song_artist = db.Table('song_artist',
                        db.Column('artist_id', db.Integer, db.ForeignKey(
                            'artist.id'), primary_key=True),
                        db.Column('song_id', db.Integer, db.ForeignKey(
-                           'song.id'), primary_key=True),
-                       db.PrimaryKeyConstraint('artist_id', 'song_id')
+                           'song.id'), primary_key=True)
                        )
 
 album_artist = db.Table('album_artist',
                         db.Column('artist_id', db.Integer, db.ForeignKey(
                             'artist.id'), primary_key=True),
                         db.Column('album_id', db.Integer, db.ForeignKey(
-                            'album.id'), primary_key=True),
-                        db.PrimaryKeyConstraint('artist_id', 'album_id')
+                            'album.id'), primary_key=True)
                         )
 
 
@@ -51,15 +49,12 @@ class Artist(Base):
 
         res = db.engine.execute(stmt)
         response = {"songs": [], "count": 0}
+
         for row in res:
-            response['id'] = row[0]
-            response['name'] = row[1]
+            response.update([('id', row[0]), ('name', row[1])])
+
             if row[2] and row[3]:
                 response['songs'].append({'id': row[2], 'name': row[3]})
                 response['count'] += 1
-
-        print('<------')
-        print(response)
-        print('------>')
 
         return response
