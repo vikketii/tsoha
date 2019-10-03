@@ -5,6 +5,8 @@
 <h2>Artist(s): {{song.artists}}</h2>
 <p>Views: {{song.views}}</p>
 
-
+<form method="POST" action="{{ url_for('songs_delete_one', song_id=song.id) }}">
+    <input type="submit" value="Delete song">
+</form>
 
 {% endblock %}

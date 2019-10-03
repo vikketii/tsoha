@@ -2,10 +2,20 @@
 
 {% block body %}
 <h1>Artist: {{artist.name}}</h1>
-<h2>{{artist.count}} Songs</h2>
-{% for song in artist.songs %}
-<p>{{song}}</p>
-{% endfor %}
 
+{% if artist.songs %}
+<h2>{{artist.count}} Songs</h2>
+<table class="table">
+    <tbody>
+        {% for song in artist.songs %}
+        <tr>
+            <td><a href="{{ url_for('songs_view_one', song_id=song.id ) }}">{{ song.name }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>No songs</h2>
+{% endif %}
 
 {% endblock %}

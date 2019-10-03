@@ -9,14 +9,9 @@
     </tr>
     {% for song in songs %}
     <tr>
-      <td><a href={{ url_for('songs_view_one', song_id=song.id ) }}>{{ song.name }}</a></td>
+      <td><a href="{{ url_for('songs_view_one', song_id=song.id ) }}">{{ song.name }}</a></td>
       <td>{{ song.views }}</td>
       <td>{{ song.account_id }}</td>
-      <td>
-          <form method="POST" action="{{ url_for('songs_add_view', song_id=song.id) }}">
-              <input type="submit" value="Add view!">
-          </form>
-      </td>
     </tr>
     {% endfor %}
   </table>
