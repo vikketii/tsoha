@@ -47,9 +47,11 @@ def songs_delete_one(song_id):
 @login_required
 def songs_create():
     form = SongForm(request.form)
+    form.song_artist.choices = [(a.id, a.name)
+                                for a in Artist.query.order_by('name')]
 
-    # if not form.validate():
-    #     return render_template('songs/new.html', form = form)
+    if not form.validate():
+        return render_template('songs/new.html', form = form)
 
     s = Song(form.name.data)
     s.account_id = current_user.id

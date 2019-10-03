@@ -58,7 +58,7 @@ class Artist(Base):
         for row in res:
             response.update([('id', row[0]), ('name', row[1])])
 
-            if row[2] not in album_ids:
+            if row[2] and row[2] not in album_ids:
                 album_ids.add(row[2])
                 response['albums'].append({'id': row[2], 'name': row[3]})
 

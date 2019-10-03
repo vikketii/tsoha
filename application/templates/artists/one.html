@@ -5,7 +5,7 @@
 
 {% if artist.albums %}
 <h2>{{ artist.albums|length }} Albums</h2>
-<table>
+<table class="table">
     <tbody>
         {% for album in artist.albums %}
         <tr>
@@ -14,7 +14,10 @@
         {% endfor %}
     </tbody>
 </table>
+{% else %}
+<h2>No albums</h2>
 {% endif %}
+
 
 {% if artist.songs %}
 <h2>{{ artist.songs|length }} Songs</h2>

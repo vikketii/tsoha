@@ -10,7 +10,7 @@ from application.artists.models import Artist
 def albums_index():
     return render_template('albums/list.html', albums=Album.query.all())
 
-@app.route('/albums/new/')
+@app.route('/albums/new/', methods=['GET'])
 @login_required
 def albums_form():
     form = AlbumForm()
@@ -27,6 +27,11 @@ def albums_view_one(album_id):
 @login_required
 def albums_create():
     form = AlbumForm(request.form)
+    form.album_artist.choices = [(a.id, a.name)
+                            for a in Artist.query.order_by('name')]
+
+    if not form.validate():
+        return render_template('albums/new.html', form=form)
 
     album = Album(form.name.data, form.release_year.data)
 
