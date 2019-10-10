@@ -14,7 +14,13 @@ password: ti
 
 [Database diagram](documentation/database_diagram.png)
 
+[Database structure](documentation/database_structure.md)
+
 [User stories](documentation/user_stories.md)
+
+[User instructions](documentation/user_instructions.md)
+
+[Dev instructions](documentation/dev_instructions.md)
 
 ## Kuvaus
 
