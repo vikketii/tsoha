@@ -6,7 +6,6 @@
 <p>Views: {{sample.views}}</p>
 <p>Added by: {{sample.account}}</p>
 
-
 {% if current_user.is_authenticated %}
 <form method="POST" action="{{ url_for('samples_delete_one', sample_id=sample.id) }}">
     <input type="submit" value="Delete sample">

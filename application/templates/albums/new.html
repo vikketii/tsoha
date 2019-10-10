@@ -3,14 +3,10 @@
 {% block body %}
 <form method="POST" action="{{ url_for('albums_create') }}">
 
-  <table>
+  <table class="table">
     <tr>
-      <td>
-        {{ form.name.label }}
-      </td>
-      <td>
-        {{ form.name }}
-      </td>
+      <td>{{ form.name.label }}</td>
+      <td>{{ form.name }}</td>
       <td>
         <ul>
           {% for error in form.name.errors %}
@@ -20,25 +16,16 @@
       </td>
     </tr>
     <tr>
-      <td>
-        {{ form.album_artist.label }}
-      </td>
-      <td>
-        {{ form.album_artist }}
-      </td>
-      <td>
-        <a href="{{ url_for('artists_form') }}">Add missing artist!</a>
-      </td>
+      <td>{{ form.album_artist.label }}</td>
+      <td>{{ form.album_artist }}</td>
+
     </tr>
     <tr>
-      <td>
-        {{ form.release_year.label }}
-      </td>
-      <td>
-        {{ form.release_year }}
-      </td>
+      <td>{{ form.release_year.label }}</td>
+      <td>{{ form.release_year }}</td>
     </tr>
     <tr>
+      <td><a href="{{ url_for('artists_form') }}">Add missing artist!</a></td>
       <td colspan="2">
         <input type="submit" value="Add a new album" />
       </td>

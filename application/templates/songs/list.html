@@ -1,18 +1,21 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table>
+<h1>Songs</h1>
+<table class="table">
+  <thead>
     <tr>
-      <th>Song</th>
-      <th>Views</th>
-      <th>Creator</th>
+      <th scope="col">Song</th>
+      <th scope="col">Views</th>
     </tr>
+  </thead>
+  <tbody>
     {% for song in songs %}
     <tr>
       <td><a href="{{ url_for('songs_view_one', song_id=song.id ) }}">{{ song.name }}</a></td>
       <td>{{ song.views }}</td>
-      <td>{{ song.account_id }}</td>
     </tr>
     {% endfor %}
-  </table>
+  </tbody>
+</table>
 {% endblock %}

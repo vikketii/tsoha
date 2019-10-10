@@ -1,16 +1,21 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table>
+<h1>Artists</h1>
+<table class="table">
+  <thead>
     <tr>
-      <th>Artist</th>
-      <th>Songs in database</th>
+      <th scope="col">Artist</th>
+      <th scope="col">Count of songs in database</th>
     </tr>
+  </thead>
+  <tbody>
     {% for artist in artists %}
     <tr>
       <td><a href={{ url_for('artists_view_one', artist_id=artist.id ) }}>{{ artist.name }}</a></td>
       <td>{{ artist.song_count }}</td>
     </tr>
     {% endfor %}
-  </table>
+  </tbody>
+</table>
 {% endblock %}

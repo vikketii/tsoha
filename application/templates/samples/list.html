@@ -1,12 +1,14 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<h1>Samples</h1>
 <table class="table">
   <thead>
     <tr>
       <th scope="col">Sample</th>
       <th scope="col">Used in</th>
       <th scope="col">Original</th>
+      <th scope="col">Views</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +17,7 @@
       <th><a href="{{ url_for('samples_view_one', sample_id=sample.id) }}">{{ sample.id }}</a></th>
       <td><a href="{{ url_for('songs_view_one', song_id=sample.used.id ) }}">{{ sample.used.name }}</a></td>
       <td><a href="{{ url_for('songs_view_one', song_id=sample.original.id ) }}">{{ sample.original.name }}</a></td>
+      <td>{{ sample.views }}</td>
     </tr>
     {% endfor %}
   </tbody>
