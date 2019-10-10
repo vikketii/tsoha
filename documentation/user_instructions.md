@@ -13,15 +13,15 @@ Adding information requires account. After logging in, user can see 'Add' item i
    Adding sample requires information about the original song and the usage of the sample and time it starts at. Time is added in 'mm:ss' format. If the original song or the song using the sample is not in the database, user can add it by clicking the 'Add song!' link.
 
    2. Song
-   [http://localhost:5000/songs/new/](http://localhost:5000/songs/new/)
+   [https://thawing-coast-05641.herokuapp.com/songs/new/](https://thawing-coast-05641.herokuapp.com/songs/new/)
    User can add song by giving the songs name and artist. If the artist is not in the database, user can add it by clicking the 'Add missing artist!' link.
 
    3. Album
-   [http://localhost:5000/albums/new/](http://localhost:5000/albums/new/)
+   [https://thawing-coast-05641.herokuapp.com/albums/new/](https://thawing-coast-05641.herokuapp.com/albums/new/)
    User can add album by giving the albums name, artist and release year. If the artist is not in the database, user can add it by clicking the 'Add missing artist!' link. Release year is limited between 1800 and current year.
 
    4. Artist
-   [http://localhost:5000/artists/new/](http://localhost:5000/artists/new/)
+   [https://thawing-coast-05641.herokuapp.com/artists/new/](https://thawing-coast-05641.herokuapp.com/artists/new/)
    Adding artist requires only artist name.
 
 4. Lists
@@ -30,7 +30,7 @@ Lists are available for everyone. There are 4 different lists(samples, songs, ar
 5. Single item
 Pages for single items in the database.
    1. Sample
-    For example page [http://localhost:5000/samples/1/](http://localhost:5000/samples/1/) contains information about single sample. The page tells where the sample is used, what is its origin and what time user can hear the sample in the songs. Page also tells how many times the page has been visited, and who is the owner of the page. If user is logged in as the page owner, deleting the sample becomes available.
+    For example page [https://thawing-coast-05641.herokuapp.com/samples/1/](https://thawing-coast-05641.herokuapp.com/samples/1/) contains information about single sample. The page tells where the sample is used, what is its origin and what time user can hear the sample in the songs. Page also tells how many times the page has been visited, and who is the owner of the page. If user is logged in as the page owner, deleting the sample becomes available.
 
     2. Song
     Coming...
