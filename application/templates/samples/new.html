@@ -11,7 +11,7 @@
     </tr>
     <tr>
       <td>{{ form.original_start.label }}</td>
-      <td>{{ form.original_start }}</td>
+      <td>{{ form.original_start(placeholder="mm:ss") }}</td>
       <td>
         <ul>
           {% for error in form.original_start.errors %}
@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <td>{{ form.used_start.label }}</td>
-      <td>{{ form.used_start }}</td>
+      <td>{{ form.used_start(placeholder="mm:ss") }}</td>
       <td>
         <ul>
           {% for error in form.used_start.errors %}

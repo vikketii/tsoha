@@ -10,8 +10,8 @@ class Sample(db.Model):
         db.Integer, db.ForeignKey('song.id'), nullable=False)
     used_id = db.Column(db.Integer, db.ForeignKey('song.id'), nullable=False)
 
-    original_start = db.Column(db.Integer, nullable=False)
-    used_start = db.Column(db.Integer, nullable=False)
+    original_start = db.Column(db.Time, nullable=False)
+    used_start = db.Column(db.Time, nullable=False)
 
     views = db.Column(db.Integer, nullable=False)
 
@@ -51,19 +51,29 @@ class Sample(db.Model):
     @staticmethod
     def find_sample_and_songs(id):
         stmt = text("""SELECT sample.id, sample.views,
-                        original.id, original.name,
-                        used.id, used.name FROM sample
+                        original.id, original.name, sample.original_start,
+                        used.id, used.name, sample.used_start,
+                        account.username FROM sample
                         JOIN song AS original ON original.id = sample.original_id
                         JOIN song AS used ON used.id = sample.used_id
+                        JOIN account ON account.id = sample.account_id
                         WHERE sample.id = :id""").params(id=id)
 
         res = db.engine.execute(stmt)
-        response = {'used': {'name': 'used_name'},
-                    'original': {'name': 'original_name'}, 'views': 11}
+        response = {}
 
         for row in res:
-            response = {'id': row[0], 'views': row[1],
-                        'original': {'id': row[2], 'name': row[3]},
-                        'used': {'id': row[4], 'name': row[5]}}
+            print(row[4])
+            orig_time = row[4]
+            used_time = row[7]
+            if type(orig_time) is str:
+                orig_time = datetime.datetime.strptime(
+                    orig_time, '%H:%M:%S.%f')
+                used_time = datetime.datetime.strptime(
+                    used_time, '%H:%M:%S.%f')
+
+            response = {'id': row[0], 'views': row[1], 'account': row[8],
+                        'original': {'id': row[2], 'name': row[3], 'start': orig_time},
+                        'used': {'id': row[5], 'name': row[6], 'start': used_time}}
 
         return response

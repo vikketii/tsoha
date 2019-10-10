@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, SelectField, validators
+from wtforms import TimeField, SelectField, validators
 
 
 class SampleForm(FlaskForm):
@@ -8,8 +8,8 @@ class SampleForm(FlaskForm):
     used = SelectField(
         'Used in', [validators.input_required()], coerce=int)
 
-    original_start = IntegerField('Sample starts at', [validators.number_range(min=0, max=1000)])
-    used_start = IntegerField('Sample starts at', [validators.number_range(min=0, max=1000)])
+    original_start = TimeField('Sample starts at', format='%M:%S')
+    used_start = TimeField('Sample starts at', format='%M:%S')
 
     class Meta:
         csrf = False
