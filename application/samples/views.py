@@ -38,6 +38,9 @@ def samples_view_one(sample_id):
 def samples_delete_one(sample_id):
     s = Sample.query.get_or_404(sample_id)
 
+    if s.account_id != current_user.id:
+        return redirect(url_for('samples_view_one', sample_id=sample_id))
+
     db.session.delete(s)
     db.session.commit()
 
