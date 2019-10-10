@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% if form.original.choices|length > 1 %}
+<form method="POST" action="{{ url_for('samples_create') }}">
+
+  <table class="table">
+    <tr>
+      <td>{{ form.original.label }}</td>
+      <td>{{ form.original }}</td>
+    </tr>
+    <tr>
+      <td>{{ form.original_start.label }}</td>
+      <td>{{ form.original_start }}</td>
+      <td>
+        <ul>
+          {% for error in form.original_start.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>{{ form.used.label }}</td>
+      <td>{{ form.used }}</td>
+    </tr>
+    <tr>
+      <td>{{ form.used_start.label }}</td>
+      <td>{{ form.used_start }}</td>
+      <td>
+        <ul>
+          {% for error in form.used_start.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td><a href="{{ url_for('songs_form') }}">Add song!</a></td>
+      <td colspan="2"><input type="submit" value="Add a new sample" /></td>
+    </tr>
+  </table>
+</form>
+{% else %}
+<a href="{{ url_for('songs_form') }}">Add song!</a>
+{% endif %}
+{% endblock %}

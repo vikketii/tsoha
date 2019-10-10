@@ -20,6 +20,9 @@ db = SQLAlchemy(app)
 # own application
 from application import views
 
+from application.samples import models
+from application.samples import views
+
 from application.songs import models
 from application.songs import views
 

@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>Sample in {{ sample.used.name }}</h1>
+<h2>Originally in {{ sample.original.name }}</h2>
+<p>Views: {{sample.views}}</p>
+
+{% if current_user.is_authenticated %}
+<form method="POST" action="{{ url_for('songs_delete_one', song_id=song.id) }}">
+    <input type="submit" value="Delete song">
+</form>
+{% endif %}
+
+{% endblock %}

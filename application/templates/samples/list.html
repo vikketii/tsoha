@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Sample</th>
+      <th scope="col">Used in</th>
+      <th scope="col">Original</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for sample in samples %}
+    <tr>
+      <th><a href="{{ url_for('samples_view_one', sample_id=sample.id) }}">{{ sample.id }}</a></th>
+      <td><a href="{{ url_for('songs_view_one', song_id=sample.used.id ) }}">{{ sample.used.name }}</a></td>
+      <td><a href="{{ url_for('songs_view_one', song_id=sample.original.id ) }}">{{ sample.original.name }}</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
