@@ -9,6 +9,7 @@
         </a>
     {% endfor %}
 </h2>
+<h2>Album: <a href="{{ url_for('albums_view_one', album_id=song.album.id) }}">{{song.album.name}}</a></h2>
 <p>Views: {{song.views}}</p>
 
 {% if current_user.is_authenticated %}

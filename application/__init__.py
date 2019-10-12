@@ -3,7 +3,6 @@ app = Flask(__name__)
 
 # database
 from flask_sqlalchemy import SQLAlchemy
-
 import os
 
 if os.environ.get("HEROKU"):

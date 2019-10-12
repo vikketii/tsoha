@@ -5,6 +5,7 @@ from application import app, db
 from application.songs.models import Song
 from application.songs.forms import SongForm
 from application.artists.models import Artist
+from application.albums.models import Album
 
 
 @app.route('/songs/', methods=['GET'])
@@ -18,6 +19,9 @@ def songs_form():
     form = SongForm()
     form.song_artist.choices = [(a.id, a.name)
                                 for a in Artist.query.order_by('name')]
+    form.album.choices = [(a.id, a.name)
+                          for a in Album.query.order_by('name')]
+
     return render_template('songs/new.html', form=form)
 
 
@@ -27,9 +31,9 @@ def songs_view_one(song_id):
     s.views += 1
     db.session().commit()
 
-    song_and_artist = Song.find_song_and_artists(song_id)
+    song_and_artists = Song.find_song_and_artists(song_id)
 
-    return render_template('songs/one.html', song=song_and_artist)
+    return render_template('songs/one.html', song=song_and_artists)
 
 
 @app.route('/songs/<song_id>/delete', methods=['POST'])
@@ -49,11 +53,13 @@ def songs_create():
     form = SongForm(request.form)
     form.song_artist.choices = [(a.id, a.name)
                                 for a in Artist.query.order_by('name')]
+    form.album.choices = [(a.id, a.name)
+                          for a in Album.query.order_by('name')]
 
     if not form.validate():
-        return render_template('songs/new.html', form = form)
+        return render_template('songs/new.html', form=form)
 
-    s = Song(form.name.data)
+    s = Song(form.name.data, form.album.data)
     s.account_id = current_user.id
 
     a = Artist.query.get(form.song_artist.data)
