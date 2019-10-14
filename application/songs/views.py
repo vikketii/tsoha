@@ -65,12 +65,8 @@ def songs_create():
     artist = Artist.query.get(form.song_artist.data)
     artist.song_artist.append(song)
 
-    album = Album.query.get(form.album.data)
-    album.songs.append(song)
-
     db.session().add(song)
     db.session().add(artist)
-    db.session().add(album)
     db.session().commit()
 
     return redirect(url_for('songs_index'))
