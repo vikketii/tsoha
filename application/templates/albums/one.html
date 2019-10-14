@@ -2,7 +2,23 @@
 
 {% block body %}
 <h1>Album: {{album.name}}</h1>
-<h2>Songs:</h2>
+<h2>
+    Artists:
+    {% for artist in album.artists %}
+    <a href="{{ url_for('artists_view_one', artist_id=artist.id) }}">{{artist.name}}</a>
+    {% endfor %}
+</h2>
+<h2>Release year: {{ album.release_year }}</h2>
+
+<table class="table">
+    <tbody>
+        {% for song in album.songs %}
+        <tr>
+            <td><a href="{{ url_for('songs_view_one', song_id=song.id) }}">{{song.name}}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 
 {% endblock %}

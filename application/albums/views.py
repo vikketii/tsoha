@@ -20,8 +20,7 @@ def albums_form():
 
 @app.route('/albums/<album_id>/', methods=['GET'])
 def albums_view_one(album_id):
-    a = Album.query.get(album_id)
-    return render_template('albums/one.html', album=a)
+    return render_template('albums/one.html', album=Album.find_album_artist_and_songs(album_id))
 
 @app.route('/albums/', methods=['POST'])
 @login_required

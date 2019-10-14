@@ -5,12 +5,8 @@
 
   <table class="table">
     <tr>
-      <td>
-        {{ form.name.label }}
-      </td>
-      <td>
-        {{ form.name }}
-      </td>
+      <td>{{ form.name.label }}</td>
+      <td>{{ form.name }}</td>
       <td>
         <ul>
           {% for error in form.name.errors %}
@@ -21,7 +17,7 @@
     </tr>
     <tr>
       <td colspan="2">
-        <input type="submit" value="Add a new artist"/>
+        <input type="submit" value="Add a new artist" />
       </td>
     </tr>
   </table>

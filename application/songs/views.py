@@ -17,18 +17,18 @@ def songs_index():
 @login_required
 def songs_form():
     form = SongForm()
-    form.song_artist.choices = [(a.id, a.name)
-                                for a in Artist.query.order_by('name')]
-    form.album.choices = [(a.id, a.name)
-                          for a in Album.query.order_by('name')]
+    form.song_artist.choices = [(artist.id, artist.name)
+                                for artist in Artist.query.order_by('name')]
+    form.album.choices = [(artist.id, artist.name)
+                          for artist in Album.query.order_by('name')]
 
     return render_template('songs/new.html', form=form)
 
 
 @app.route('/songs/<song_id>/', methods=['GET'])
 def songs_view_one(song_id):
-    s = Song.query.get_or_404(song_id)
-    s.views += 1
+    song = Song.query.get_or_404(song_id)
+    song.views += 1
     db.session().commit()
 
     song_and_artists = Song.find_song_and_artists(song_id)
@@ -39,9 +39,9 @@ def songs_view_one(song_id):
 @app.route('/songs/<song_id>/delete', methods=['POST'])
 @login_required
 def songs_delete_one(song_id):
-    s = Song.query.get_or_404(song_id)
+    song = Song.query.get_or_404(song_id)
 
-    db.session.delete(s)
+    db.session.delete(song)
     db.session.commit()
 
     return redirect(url_for('songs_index'))
@@ -51,22 +51,26 @@ def songs_delete_one(song_id):
 @login_required
 def songs_create():
     form = SongForm(request.form)
-    form.song_artist.choices = [(a.id, a.name)
-                                for a in Artist.query.order_by('name')]
-    form.album.choices = [(a.id, a.name)
-                          for a in Album.query.order_by('name')]
+    form.song_artist.choices = [(artist.id, artist.name)
+                                for artist in Artist.query.order_by('name')]
+    form.album.choices = [(artist.id, artist.name)
+                          for artist in Album.query.order_by('name')]
 
     if not form.validate():
         return render_template('songs/new.html', form=form)
 
-    s = Song(form.name.data, form.album.data)
-    s.account_id = current_user.id
+    song = Song(form.name.data, form.album.data)
+    song.account_id = current_user.id
 
-    a = Artist.query.get(form.song_artist.data)
-    a.song_artist.append(s)
+    artist = Artist.query.get(form.song_artist.data)
+    artist.song_artist.append(song)
 
-    db.session().add(s)
-    db.session().add(a)
+    album = Album.query.get(form.album.data)
+    album.songs.append(song)
+
+    db.session().add(song)
+    db.session().add(artist)
+    db.session().add(album)
     db.session().commit()
 
     return redirect(url_for('songs_index'))

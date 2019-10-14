@@ -4,9 +4,9 @@
 <h1>Title: {{song.name}}</h1>
 <h2>Artists:
     {% for artist in song.artists %}
-        <a href="{{ url_for('artists_view_one', artist_id=artist.id ) }}">
-                {{artist.name}}
-        </a>
+    <a href="{{ url_for('artists_view_one', artist_id=artist.id ) }}">
+        {{artist.name}}
+    </a>
     {% endfor %}
 </h2>
 <h2>Album: <a href="{{ url_for('albums_view_one', album_id=song.album.id) }}">{{song.album.name}}</a></h2>
