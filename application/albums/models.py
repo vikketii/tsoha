@@ -21,14 +21,8 @@ class Album(Base):
                         JOIN artist ON artist.id = album_artist.artist_id
                         WHERE album.id = :id""").params(id=id)
 
-
         res = db.engine.execute(stmt)
         response = {'artists': [], 'songs': []}
-
-        # print('<------')
-        # for row in res:
-        #     print(row)
-        # print('<------')
 
         for row in res:
             response.update([('id', row[0]), ('name', row[1]),
