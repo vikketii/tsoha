@@ -33,8 +33,6 @@ Kappaleista lisättäviin tietoihin kuuluvat kappaleen nimi, albumi, tekijä ja 
 Toimintoja:
 - Kirjautuminen
 - Kappaleen syöttö ja muokkaus
-- Kappaleiden etsiminen ja katselu (kappaleen, albumin ja artistin perusteella)
+- Kappaleiden katselu (kappaleen, albumin ja artistin perusteella)
 - Kappaleen samplejen listaus ja linkit alkuperäisiin kappaleisiin
 - Suosituimpien samplejen listaus (katseluiden perusteella)
-- Viimeisimmät lisäykset
-- Admin käyttäjät voivat hallinnoida kirjautuneita käyttäjiä sekä lisätä, muokata ja poistaa kappaleita.
