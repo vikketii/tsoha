@@ -17,8 +17,8 @@ class Album(Base):
                         artist.id, artist.name,
                         song.id, song.name FROM song
                         JOIN album ON album.id = song.album_id
-                        JOIN album_artist ON album_artist.album_id = album.id
-                        JOIN artist ON artist.id = album_artist.artist_id
+                        JOIN song_artist ON song_artist.song_id = song.id
+                        JOIN artist ON artist.id = song_artist.artist_id
                         WHERE album.id = :id""").params(id=id)
 
         res = db.engine.execute(stmt)
@@ -29,5 +29,7 @@ class Album(Base):
                              ('release_year', row[2])])
             response['artists'].append({'id': row[3], 'name': row[4]})
             response['songs'].append({'id': row[5], 'name': row[6]})
+
+        print(response)
 
         return response
