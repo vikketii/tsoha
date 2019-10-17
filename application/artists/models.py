@@ -47,7 +47,7 @@ class Artist(Base):
                         LEFT JOIN album ON album.id = album_artist.album_id
                         LEFT JOIN song ON song.album_id = album.id
                         WHERE artist.id = :id
-                        GROUP BY album.id
+                        GROUP BY artist.id, album.id
                         ''').params(id=id)
 
         res = db.engine.execute(stmt)
