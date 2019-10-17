@@ -39,7 +39,7 @@ def auth_login():
     form = LoginForm(request.form)
 
     user = User.query.filter_by(
-        username=form.username.data, password=form.password.data).first()
+        username=form.username.data).first()
 
     if not user or not bcrypt.check_password_hash(user.password, form.password.data):
         return render_template('auth/loginform.html', form=form, error='No such username or password')
