@@ -23,8 +23,8 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{{ url_for('samples_index') }} ">List samples</a>
                         <a class="dropdown-item" href="{{ url_for('songs_index') }} ">List songs</a>
-                        <a class="dropdown-item" href="{{ url_for('artists_index') }} ">List artists</a>
                         <a class="dropdown-item" href="{{ url_for('albums_index') }} ">List albums</a>
+                        <a class="dropdown-item" href="{{ url_for('artists_index') }} ">List artists</a>
                     </div>
                 </li>
                 {% if current_user.is_authenticated %}
@@ -34,8 +34,8 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{{ url_for('samples_form') }} ">Add a sample</a>
                         <a class="dropdown-item" href="{{ url_for('songs_form') }} ">Add a song</a>
-                        <a class="dropdown-item" href="{{ url_for('artists_form') }} ">Add an artist</a>
                         <a class="dropdown-item" href="{{ url_for('albums_form') }} ">Add an album</a>
+                        <a class="dropdown-item" href="{{ url_for('artists_form') }} ">Add an artist</a>
                     </div>
                 </li>
                 {% endif %}

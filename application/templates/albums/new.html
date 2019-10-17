@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
+{% if form.album_artist.choices|length > 0 %}
 <form method="POST" action="{{ url_for('albums_create') }}">
 
   <table class="table">
@@ -24,12 +25,12 @@
       <td>{{ form.release_year.label }}</td>
       <td>{{ form.release_year }}</td>
       <td>
-          <ul>
-            {% for error in form.release_year.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-          </ul>
-        </td>
+        <ul>
+          {% for error in form.release_year.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
     </tr>
     <tr>
       <td><a href="{{ url_for('artists_form') }}">Add missing artist!</a></td>
@@ -39,4 +40,7 @@
     </tr>
   </table>
 </form>
+{% else %}
+<a href="{{ url_for('artists_form') }}">Add artist!</a>
+{% endif %}
 {% endblock %}
