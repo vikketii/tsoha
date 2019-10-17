@@ -12,6 +12,17 @@ def samples_index():
     return render_template('samples/list.html', samples=Sample.get_samples_and_songs())
 
 
+@app.route('/samples/owned', methods=['GET'])
+@login_required
+def samples_owned():
+    if current_user.admin:
+        samples = Sample.get_samples_and_songs()
+    else:
+        samples = Sample.get_samples_and_songs_owned(current_user.id)
+
+    return render_template('samples/list.html', samples=samples)
+
+
 @app.route('/samples/new/', methods=['GET'])
 @login_required
 def samples_form():
@@ -38,7 +49,7 @@ def samples_view_one(sample_id):
 def samples_delete_one(sample_id):
     s = Sample.query.get_or_404(sample_id)
 
-    if s.account_id != current_user.id:
+    if not current_user.admin and s.account_id != current_user.id:
         return redirect(url_for('samples_view_one', sample_id=sample_id))
 
     db.session.delete(s)
@@ -73,7 +84,7 @@ def samples_create():
 def samples_edit_one(sample_id):
     sample = Sample.query.get_or_404(sample_id)
 
-    if sample.account_id != current_user.id:
+    if not current_user.admin and sample.account_id != current_user.id:
         return redirect(url_for('samples_view_one', sample_id=sample_id))
 
     form = SampleForm(request.form)
@@ -88,6 +99,7 @@ def samples_edit_one(sample_id):
 
     return render_template('samples/update.html', form=form, sample_id=sample_id)
 
+
 @app.route('/samples/<sample_id>/edit', methods=['POST'])
 @login_required
 def samples_update_one(sample_id):
@@ -101,7 +113,7 @@ def samples_update_one(sample_id):
 
     sample = Sample.query.get_or_404(sample_id)
 
-    if sample.account_id != current_user.id:
+    if not current_user.admin and sample.account_id != current_user.id:
         return redirect(url_for('samples_view_one', sample_id=sample_id))
 
     sample.original_id = form.original.data

@@ -39,6 +39,9 @@ def songs_view_one(song_id):
 @app.route('/songs/<song_id>/delete', methods=['POST'])
 @login_required
 def songs_delete_one(song_id):
+    if not current_user.admin:
+        redirect(url_for('songs_index'))
+
     song = Song.query.get_or_404(song_id)
 
     db.session.delete(song)

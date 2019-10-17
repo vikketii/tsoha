@@ -12,7 +12,7 @@
 <h2>Album: <a href="{{ url_for('albums_view_one', album_id=song.album.id) }}">{{song.album.name}}</a></h2>
 <p>Views: {{song.views}}</p>
 
-{% if current_user.is_authenticated %}
+{% if current_user.admin %}
 <form method="POST" action="{{ url_for('songs_delete_one', song_id=song.id) }}">
     <input type="submit" value="Delete song">
 </form>
