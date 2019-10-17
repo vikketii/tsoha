@@ -31,7 +31,26 @@ class Song(Base):
         for row in res:
             response.update(
                 [('id', row[0]), ('name', row[1]), ('views', row[2]),
-                ('album', {'id': row[5], 'name': row[6]})])
+                 ('album', {'id': row[5], 'name': row[6]})])
             response['artists'].append({'id': row[3], 'name': row[4]})
+
+        return response
+
+    @staticmethod
+    def get_songs_and_sample_counts():
+        stmt = text("""SELECT song.id, song.name,
+                        COUNT(used.id), COUNT(original.id), song.views FROM song
+                        LEFT JOIN sample AS used ON used.used_id = song.id
+                        LEFT JOIN sample AS original ON original.original_id = song.id
+                        GROUP BY song.id
+                        ORDER BY song.views DESC
+                        """)
+
+        res = db.engine.execute(stmt)
+        response = []
+
+        for row in res:
+            response.append({'id': row[0], 'name': row[1], 'samples_used_count': row[2],
+                             'samples_made_count': row[3], 'views': row[4]})
 
         return response

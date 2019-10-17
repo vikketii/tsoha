@@ -42,27 +42,22 @@ class Artist(Base):
     def find_artist_and_all_albums_and_songs(id):
         stmt = text('''SELECT artist.id, artist.name,
                         album.id, album.name,
-                        song.id, song.name FROM Artist
-                        LEFT JOIN album_artist ON artist.id = album_artist.artist_id
-                        LEFT JOIN album ON album.id = album_artist.album_id
-                        LEFT JOIN song_artist ON artist.id = song_artist.artist_id
-                        LEFT JOIN song ON song.id = song_artist.song_id
+                        COUNT(song.id) FROM Artist
+                        JOIN album_artist ON album_artist.artist_id = artist.id
+                        JOIN album ON album.id = album_artist.album_id
+                        JOIN song ON song.album_id = album.id
                         WHERE artist.id = :id
+                        GROUP BY album.id
                         ''').params(id=id)
 
         res = db.engine.execute(stmt)
-        response = {'albums': [], 'songs': []}
+        response = {'albums': []}
 
-        album_ids = set()
 
         for row in res:
             response.update([('id', row[0]), ('name', row[1])])
 
-            if row[2] and row[2] not in album_ids:
-                album_ids.add(row[2])
-                response['albums'].append({'id': row[2], 'name': row[3]})
-
-            if row[4] and row[5]:
-                response['songs'].append({'id': row[4], 'name': row[5]})
+            if row[2]:
+                response['albums'].append({'id': row[2], 'name': row[3], 'song_count': row[4]})
 
         return response

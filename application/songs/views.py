@@ -10,7 +10,7 @@ from application.albums.models import Album
 
 @app.route('/songs/', methods=['GET'])
 def songs_index():
-    return render_template('songs/list.html', songs=Song.query.all())
+    return render_template('songs/list.html', songs=Song.get_songs_and_sample_counts())
 
 
 @app.route('/songs/new/', methods=['GET'])

@@ -7,6 +7,7 @@
     <tr>
       <th scope="col">Song</th>
       <th scope="col">Samples used in this song</th>
+      <th scope="col">Samples made from this song</th>
       <th scope="col">Views</th>
     </tr>
   </thead>
@@ -14,7 +15,8 @@
     {% for song in songs %}
     <tr>
       <td><a href="{{ url_for('songs_view_one', song_id=song.id ) }}">{{ song.name }}</a></td>
-      <td>{{ song.samples_used }}</td>
+      <td>{{ song.samples_used_count }}</td>
+      <td>{{ song.samples_made_count }}</td>
       <td>{{ song.views }}</td>
     </tr>
     {% endfor %}

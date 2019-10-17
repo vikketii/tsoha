@@ -12,38 +12,23 @@
     {% endif %}
 </h2>
 <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Album</th>
+            <th scope="col">Songs in album</th>
+        </tr>
+    </thead>
     <tbody>
         {% for album in artist.albums %}
         <tr>
             <td><a href="{{ url_for('albums_view_one', album_id=album.id ) }}">{{ album.name }}</a></td>
+            <td>{{ album.song_count }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 {% else %}
 <h2>No albums</h2>
-{% endif %}
-
-
-{% if artist.songs %}
-<h2>{{ artist.songs|length }}
-    {% if artist.songs|length > 1 %}
-    Songs
-    {% else %}
-    Song
-    {% endif %}
-</h2>
-<table class="table">
-    <tbody>
-        {% for song in artist.songs %}
-        <tr>
-            <td><a href="{{ url_for('songs_view_one', song_id=song.id ) }}">{{ song.name }}</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<h2>No songs</h2>
 {% endif %}
 
 {% endblock %}

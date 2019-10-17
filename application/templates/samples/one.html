@@ -7,9 +7,14 @@
 <p>Added by: {{sample.account}}</p>
 {% if current_user.is_authenticated %}
 {% if current_user.id == sample.account_id %}
+<p>
+    <a href="{{ url_for('samples_edit_one', sample_id=sample.id) }}" class="btn btn-primary btn-lg active" role="button"
+        aria-pressed="true">Edit sample</a>
+</p>
 <form method="POST" action="{{ url_for('samples_delete_one', sample_id=sample.id) }}">
     <input type="submit" value="Delete sample">
 </form>
+
 {% endif %}
 {% endif %}
 

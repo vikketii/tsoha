@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
 from application import app, db
 from application.auth.models import User
@@ -46,6 +46,7 @@ def auth_login():
 
 
 @app.route('/auth/logout')
+@login_required
 def auth_logout():
     logout_user()
     return redirect(url_for('index'))

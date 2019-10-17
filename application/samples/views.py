@@ -66,3 +66,49 @@ def samples_create():
     db.session().commit()
 
     return redirect(url_for('samples_index'))
+
+
+@app.route('/samples/<sample_id>/edit', methods=['GET'])
+@login_required
+def samples_edit_one(sample_id):
+    sample = Sample.query.get_or_404(sample_id)
+
+    if sample.account_id != current_user.id:
+        return redirect(url_for('samples_view_one', sample_id=sample_id))
+
+    form = SampleForm(request.form)
+    songs = [(song.id, song.name) for song in Song.query.order_by('name')]
+    form.original.choices = songs
+    form.used.choices = songs
+
+    form.original.data = sample.original_id
+    form.used.data = sample.used_id
+    form.original_start.data = sample.original_start
+    form.used_start.data = sample.used_start
+
+    return render_template('samples/update.html', form=form, sample_id=sample_id)
+
+@app.route('/samples/<sample_id>/edit', methods=['POST'])
+@login_required
+def samples_update_one(sample_id):
+    form = SampleForm(request.form)
+    songs = [(song.id, song.name) for song in Song.query.order_by('name')]
+    form.original.choices = songs
+    form.used.choices = songs
+
+    if not form.validate():
+        return render_template('samples/new.html', form=form)
+
+    sample = Sample.query.get_or_404(sample_id)
+
+    if sample.account_id != current_user.id:
+        return redirect(url_for('samples_view_one', sample_id=sample_id))
+
+    sample.original_id = form.original.data
+    sample.used_id = form.used.data
+    sample.original_start = form.original_start.data
+    sample.used_start = form.used_start.data
+
+    db.session.commit()
+
+    return redirect(url_for('samples_view_one', sample_id=sample_id))

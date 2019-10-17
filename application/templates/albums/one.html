@@ -11,6 +11,11 @@
 <h2>Release year: {{ album.release_year }}</h2>
 
 <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Songs</th>
+        </tr>
+    </thead>
     <tbody>
         {% for song in album.songs %}
         <tr>
