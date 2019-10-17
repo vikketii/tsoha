@@ -16,9 +16,9 @@ class Album(Base):
         stmt = text("""SELECT album.id, album.name, album.release_year,
                         artist.id, artist.name,
                         song.id, song.name FROM album
-                        JOIN song ON song.album_id = album.id
-                        JOIN album_artist ON album_artist.album_id = album.id
-                        JOIN artist ON artist.id = album_artist.artist_id
+                        LEFT JOIN song ON song.album_id = album.id
+                        LEFT JOIN album_artist ON album_artist.album_id = album.id
+                        LEFT JOIN artist ON artist.id = album_artist.artist_id
                         WHERE album.id = :id""").params(id=id)
 
         res = db.engine.execute(stmt)

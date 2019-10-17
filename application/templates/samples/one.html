@@ -1,8 +1,15 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1>Sample in {{ sample.used.name }} at {{ sample.used.start.strftime("%M:%S") }}</h1>
-<h2>Originally in {{ sample.original.name }} at {{ sample.original.start.strftime("%M:%S") }}</h2>
+<h1>Sample in
+    <a href="{{ url_for('songs_view_one', song_id=sample.used.id) }}">{{ sample.used.name }}</a>
+    at {{ sample.used.start.strftime("%M:%S") }}
+</h1>
+<h2>
+    Originally in
+    <a href="{{ url_for('songs_view_one', song_id=sample.original.id) }}">{{ sample.original.name }}</a>
+    at {{ sample.original.start.strftime("%M:%S") }}
+</h2>
 <p>Views: {{sample.views}}</p>
 <p>Added by: {{sample.account}}</p>
 {% if current_user.is_authenticated %}

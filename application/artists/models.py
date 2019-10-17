@@ -43,9 +43,9 @@ class Artist(Base):
         stmt = text('''SELECT artist.id, artist.name,
                         album.id, album.name,
                         COUNT(song.id) FROM Artist
-                        JOIN album_artist ON album_artist.artist_id = artist.id
-                        JOIN album ON album.id = album_artist.album_id
-                        JOIN song ON song.album_id = album.id
+                        LEFT JOIN album_artist ON album_artist.artist_id = artist.id
+                        LEFT JOIN album ON album.id = album_artist.album_id
+                        LEFT JOIN song ON song.album_id = album.id
                         WHERE artist.id = :id
                         GROUP BY album.id
                         ''').params(id=id)

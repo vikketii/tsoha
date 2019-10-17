@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1>Title: {{song.name}}</h1>
+<h1>Song title: {{song.name}}</h1>
 <h2>Artists:
     {% for artist in song.artists %}
     <a href="{{ url_for('artists_view_one', artist_id=artist.id ) }}">
