@@ -23,7 +23,7 @@
             <td><a href="{{ url_for('songs_view_one', song_id=most_recent_sample.used.id ) }}">{{ most_recent_sample.used.name }}</a></td>
             <td><a href="{{ url_for('songs_view_one', song_id=most_recent_sample.original.id ) }}">{{ most_recent_sample.original.name }}</a></td>
             <td>{{ most_recent_sample.views }}</td>
-            <td>{{ most_recent_sample.time }}</td>
+            <td>{{ most_recent_sample.time.strftime("%Y-%m-%d %H:%M") }}</td>
         </tr>
     </tbody>
 </table>

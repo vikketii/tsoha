@@ -113,7 +113,11 @@ class Sample(db.Model):
         response = {}
 
         for row in res:
-            response = {'id': row[0], 'time': row[1], 'views': row[2], 'original': {
+            time = row[1]
+            if type(time) is str:
+                time = datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')
+
+            response = {'id': row[0], 'time': time, 'views': row[2], 'original': {
                 'id': row[3], 'name': row[4]}, 'used': {'id': row[5], 'name': row[6]}}
 
         return response
