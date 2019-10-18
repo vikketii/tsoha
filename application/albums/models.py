@@ -49,7 +49,7 @@ class Album(Base):
                         LEFT JOIN sample ON sample.used_id = song.id
                         LEFT JOIN album_artist ON album_artist.album_id = album.id
                         LEFT JOIN artist ON artist.id = album_artist.artist_id
-                        GROUP BY Album.id) AS counts
+                        GROUP BY album.id, artist.id) AS counts
                         """)
 
         res = db.engine.execute(stmt)
