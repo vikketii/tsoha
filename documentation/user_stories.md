@@ -2,6 +2,21 @@
 
 ## As a normal user, I want to
 
+### create an account
+<pre><code>
+INSERT INTO account
+(username, password, admin, date_created)
+VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+</code></pre>
+
+### log in
+<pre><code>
+SELECT account.id AS account_id, account.username AS account_username, account.password AS account_password,
+account.admin AS account_admin, account.date_created AS account_date_created
+FROM account
+WHERE account.username = ?
+</code></pre>
+
 ### see the most recently added sample
 <pre><code>
 SELECT sample.id, MAX(sample.date_created), sample.views,
@@ -35,6 +50,30 @@ JOIN song AS original ON original.id = sample.original_id
 JOIN song AS used ON used.id = sample.used_id
 WHERE sample.account_id = :user_id
 ORDER BY sample.views DESC
+</code></pre>
+
+### view all songs and number of samples used and originated from each
+<pre><code>
+SELECT song.id, song.name,
+COUNT(used.id), COUNT(original.id), song.views FROM song
+LEFT JOIN sample AS used ON used.used_id = song.id
+LEFT JOIN sample AS original ON original.original_id = song.id
+GROUP BY song.id
+ORDER BY song.views DESC
+</code></pre>
+
+### view all albums
+<pre><code>
+SELECT album.id AS album_id, album.name AS album_name, album.release_year AS album_release_year
+FROM album
+</code></pre>
+
+### view all artists and count all their songs in the database
+<pre><code>
+SELECT artist.id, artist.name, COUNT(song.id) AS song_count FROM Artist
+LEFT JOIN song_artist AS song_artist_1 ON artist.id = song_artist_1.artist_id
+LEFT JOIN song ON song.id = song_artist_1.song_id
+GROUP BY artist.id
 </code></pre>
 
 ### view single sample and it's original song and where it's used in
@@ -99,7 +138,15 @@ WHERE sample.account_id = :user_id
 ORDER BY sample.views DESC
 </code></pre>
 
-### edit and remove a sample that I own
+### edit a sample that I own so that I change the song where it's used
+<pre><code>
+UPDATE sample SET used_id=? WHERE sample.id = ?
+</code></pre>
+
+### remove a sample that I own
+<pre><code>
+DELETE FROM sample WHERE sample.id = ?
+</code></pre>
 
 ## As an admin, I want to do all of the above and
 
