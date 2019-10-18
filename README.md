@@ -11,8 +11,6 @@ Common user credentials: username: 'kayttaja' password: 'salis'
 
 ## Documentation
 
-[Database diagram](documentation/database_diagram.png)
-
 [Database structure](documentation/database_structure.md)
 
 [User stories](documentation/user_stories.md)
