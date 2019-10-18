@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('songs_update_one', song_id=song_id) }}">
+    <table class="table">
+        <tr>
+            <td>{{ form.name.label }}</td>
+            <td>{{ form.name }}</td>
+            <td>
+                <ul>
+                    {% for error in form.name.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.album.label }}</td>
+            <td>{{ form.album }}</td>
+        </tr>
+        <tr>
+            <td><a href="{{ url_for('albums_form') }}">Add missing album!</a></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Update song" />
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

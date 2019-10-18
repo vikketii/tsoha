@@ -53,11 +53,11 @@ class Artist(Base):
         res = db.engine.execute(stmt)
         response = {'albums': []}
 
-
         for row in res:
             response.update([('id', row[0]), ('name', row[1])])
 
             if row[2]:
-                response['albums'].append({'id': row[2], 'name': row[3], 'song_count': row[4]})
+                response['albums'].append(
+                    {'id': row[2], 'name': row[3], 'song_count': row[4]})
 
         return response

@@ -54,3 +54,18 @@ class Song(Base):
                              'samples_made_count': row[3], 'views': row[4]})
 
         return response
+
+    @staticmethod
+    def get_song_artist(id):
+        stmt = text("""SELECT artist.id FROM song
+                        JOIN song_artist ON song_artist.song_id = song.id
+                        JOIN artist ON artist.id = song_artist.artist_id
+                        WHERE song.id = :id""").params(id=id)
+
+        res = db.engine.execute(stmt)
+        response = None
+
+        for row in res:
+            response = row[0]
+
+        return response
