@@ -5,11 +5,7 @@
 <h1>Whosampledthis</h1>
 <p>Website for finding information about audio samples used in songs.</p>
 
-{% if current_user.is_authenticated %}
-<p>Logged in as {{ current_user.username }}</p>
-{% endif %}
-
-{% if most_recent_sample %}
+{% if most_recent_sample.id %}
 <h3>Most recently added sample:</h3>
 <table class="table">
     <thead>
@@ -35,7 +31,7 @@
 <h3>There are no samples in the database yet.</h3>
 {% endif %}
 
-{% if album_with_most_samples %}
+{% if album_with_most_samples.id and album_with_most_samples.samples_count > 0 %}
 <h3>Album using most samples:</h3>
 <table class="table">
     <thead>
