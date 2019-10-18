@@ -16,23 +16,34 @@ class Song(Base):
         self.views = 0
 
     @staticmethod
-    def find_song_and_artists(id):
+    def find_song_and_artists_and_samples(id):
         stmt = text("""SELECT song.id, song.name, song.views,
                         artist.id, artist.name,
-                        album.id, album.name FROM song
+                        album.id, album.name,
+                        used.id, used_original.id, used_original.name,
+                        original.id, original_used.id, original_used.name FROM song
                         JOIN song_artist ON song_artist.song_id = song.id
                         JOIN artist ON artist.id = song_artist.artist_id
                         JOIN album ON album.id = song.album_id
+                        LEFT JOIN sample AS used ON used.used_id = song.id
+                        LEFT JOIN song AS used_original ON used_original.id = used.original_id
+                        LEFT JOIN sample AS original ON original.original_id = song.id
+                        LEFT JOIN song AS original_used ON original_used.id = original.used_id
                         WHERE song.id = :id""").params(id=id)
 
         res = db.engine.execute(stmt)
-        response = {'artists': []}
+        response = {'artists': [], 'used_samples': [], 'original_samples': []}
 
         for row in res:
             response.update(
                 [('id', row[0]), ('name', row[1]), ('views', row[2]),
                  ('album', {'id': row[5], 'name': row[6]})])
             response['artists'].append({'id': row[3], 'name': row[4]})
+
+            if row[7] and row[8]:
+                response['used_samples'].append({'id': row[7], 'original': {'id': row[8], 'name': row[9]}})
+            if row[10] and row[11]:
+                response['original_samples'].append({'id': row[10], 'used': {'id': row[11], 'name': row[12]}})
 
         return response
 

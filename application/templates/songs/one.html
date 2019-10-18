@@ -22,4 +22,46 @@
 </form>
 {% endif %}
 
+{% if song.used_samples %}
+<h3>Samples used in this song</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Sample</th>
+            <th scope="col">Original in</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sample in song.used_samples %}
+        <tr>
+            <th><a href="{{ url_for('samples_view_one', sample_id=sample.id) }}">{{ sample.id }}</a></th>
+            <td><a href="{{ url_for('songs_view_one', song_id=sample.original.id ) }}">{{ sample.original.name }}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% if song.original_samples %}
+<h3>Samples made from this song</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Sample</th>
+            <th scope="col">Used in</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sample in song.original_samples %}
+        <tr>
+            <th><a href="{{ url_for('samples_view_one', sample_id=sample.id) }}">{{ sample.id }}</a></th>
+            <td><a href="{{ url_for('songs_view_one', song_id=sample.used.id ) }}">{{ sample.used.name }}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
 {% endblock %}

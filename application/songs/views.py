@@ -31,9 +31,9 @@ def songs_view_one(song_id):
     song.views += 1
     db.session().commit()
 
-    song_and_artists = Song.find_song_and_artists(song_id)
+    song_and_artists_and_samples = Song.find_song_and_artists_and_samples(song_id)
 
-    return render_template('songs/one.html', song=song_and_artists)
+    return render_template('songs/one.html', song=song_and_artists_and_samples)
 
 
 @app.route('/songs/<song_id>/delete', methods=['POST'])
