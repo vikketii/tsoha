@@ -85,7 +85,6 @@ class Sample(db.Model):
         response = {}
 
         for row in res:
-            print(row[4])
             orig_time = row[4]
             used_time = row[7]
             if type(orig_time) is str:
@@ -97,5 +96,23 @@ class Sample(db.Model):
             response = {'id': row[0], 'views': row[1], 'account': row[8], 'account_id': row[9],
                         'original': {'id': row[2], 'name': row[3], 'start': orig_time},
                         'used': {'id': row[5], 'name': row[6], 'start': used_time}}
+
+        return response
+
+    @staticmethod
+    def get_most_recent():
+        stmt = text("""SELECT sample.id, MAX(sample.date_created), sample.views,
+                        original.id, original.name,
+                        used.id, used.name FROM sample
+                        JOIN song AS original ON original.id = sample.original_id
+                        JOIN song AS used ON used.id = sample.used_id
+                        """)
+
+        res = db.engine.execute(stmt)
+        response = {}
+
+        for row in res:
+            response = {'id': row[0], 'time': row[1], 'views': row[2], 'original': {
+                'id': row[3], 'name': row[4]}, 'used': {'id': row[5], 'name': row[6]}}
 
         return response

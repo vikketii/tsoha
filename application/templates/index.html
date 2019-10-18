@@ -3,9 +3,55 @@
 {% block body %}
 
 <h1>Whosampledthis</h1>
-<h2>Website for finding information about audio samples used in songs.</h2>
+<p>Website for finding information about audio samples used in songs.</p>
 
 {% if current_user.is_authenticated %}
 <p>Logged in as {{ current_user.username }}</p>
+{% endif %}
+
+{% if most_recent_sample %}
+<h3>Most recently added sample:</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Sample</th>
+            <th scope="col">Used in</th>
+            <th scope="col">Original</th>
+            <th scope="col">Views</th>
+            <th scope="col">Time added</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th><a href="{{ url_for('samples_view_one', sample_id=most_recent_sample.id) }}">{{ most_recent_sample.id }}</a></th>
+            <td><a href="{{ url_for('songs_view_one', song_id=most_recent_sample.used.id ) }}">{{ most_recent_sample.used.name }}</a></td>
+            <td><a href="{{ url_for('songs_view_one', song_id=most_recent_sample.original.id ) }}">{{ most_recent_sample.original.name }}</a></td>
+            <td>{{ most_recent_sample.views }}</td>
+            <td>{{ most_recent_sample.time }}</td>
+        </tr>
+    </tbody>
+</table>
+{% else %}
+<h3>There are no samples in the database yet.</h3>
+{% endif %}
+
+{% if album_with_most_samples %}
+<h3>Album using most samples:</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Album</th>
+            <th scope="col">Artist</th>
+            <th scope="col">Samples</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th><a href="{{ url_for('albums_view_one', album_id=album_with_most_samples.id) }}">{{ album_with_most_samples.name }}</a></th>
+            <td><a href="{{ url_for('artists_view_one', artist_id=album_with_most_samples.artist.id ) }}">{{ album_with_most_samples.artist.name }}</a></td>
+            <td>{{ album_with_most_samples.samples_count }}</td>
+        </tr>
+    </tbody>
+</table>
 {% endif %}
 {% endblock %}
