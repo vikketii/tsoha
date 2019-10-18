@@ -106,6 +106,7 @@ class Sample(db.Model):
                         used.id, used.name FROM sample
                         JOIN song AS original ON original.id = sample.original_id
                         JOIN song AS used ON used.id = sample.used_id
+                        GROUP BY sample.id
                         """)
 
         res = db.engine.execute(stmt)
