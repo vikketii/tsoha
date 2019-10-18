@@ -7,7 +7,7 @@ Current database matches the programs needs, but there is room for improvements.
 
 ## Database diagram
 
-[database diagram](database_diagram.png)
+![database diagram](database_diagram.png)
 
 
 ## SQL for creating the tables
