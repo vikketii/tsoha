@@ -50,7 +50,7 @@ class Album(Base):
                         LEFT JOIN album_artist ON album_artist.album_id = album.id
                         LEFT JOIN artist ON artist.id = album_artist.artist_id
                         GROUP BY album.id, artist.id) AS counts
-                        GROUP BY counts.id
+                        GROUP BY counts.id, counts.name, counts.artist_id, counts.artist_name
                         """)
 
         res = db.engine.execute(stmt)
