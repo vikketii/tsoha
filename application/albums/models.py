@@ -41,7 +41,7 @@ class Album(Base):
 
     @staticmethod
     def get_album_with_most_samples():
-        stmt = text("""SELECT id, name, artist_id, artist_name, MAX(sample_count) FROM (
+        stmt = text("""SELECT counts.id, counts.name, counts.artist_id, counts.artist_name, MAX(counts.sample_count) FROM (
                         SELECT album.id AS id, album.name AS name,
                         artist.id AS artist_id, artist.name AS artist_name,
                         COUNT(sample.id) AS sample_count FROM album
@@ -49,7 +49,7 @@ class Album(Base):
                         LEFT JOIN sample ON sample.used_id = song.id
                         LEFT JOIN album_artist ON album_artist.album_id = album.id
                         LEFT JOIN artist ON artist.id = album_artist.artist_id
-                        GROUP BY Album.id)
+                        GROUP BY Album.id) AS counts
                         """)
 
         res = db.engine.execute(stmt)
